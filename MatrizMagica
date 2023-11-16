@@ -1,0 +1,70 @@
+#include <stdio.h>
+
+void imprimirMatriz(int matriz[3][3]) {
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            printf(" %d ", matriz[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+int esMatrizMagica(int matriz[3][3]) {
+  
+    int sumaFila = matriz[0][0] + matriz[0][1] + matriz[0][2];
+
+   
+    for (int i = 0; i < 3; i++) {
+        int sumaFilaActual = matriz[i][0] + matriz[i][1] + matriz[i][2];
+        printf("Suma fila %d: %d\n", i + 1, sumaFilaActual);
+        if (sumaFilaActual != sumaFila) {
+            return 0; 
+        }
+    }
+   
+    for (int j = 0; j < 3; j++) {
+        int sumaColumna = matriz[0][j] + matriz[1][j] + matriz[2][j];
+        printf("Suma columna %d: %d\n", j + 1, sumaColumna);
+        if (sumaColumna != sumaFila) {
+            return 0; 
+        }
+    }
+
+    
+    int sumaDiagonalPrincipal = matriz[0][0] + matriz[1][1] + matriz[2][2];
+    printf("Suma diagonal principal: %d\n", sumaDiagonalPrincipal);
+    if (sumaDiagonalPrincipal != sumaFila) {
+        return 0; 
+    }
+  
+    int sumaDiagonalSecundaria = matriz[0][2] + matriz[1][1] + matriz[2][0];
+    printf("Suma diagonal secundaria: %d\n", sumaDiagonalSecundaria);
+    if (sumaDiagonalSecundaria != sumaFila) {
+        return 0;
+    }
+
+    return 1;
+}
+
+int main() {
+    int matriz[3][3];
+   
+    printf("Ingrese  elementos matriz:\n");
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            printf("Posicion (%d, %d): ", i, j);
+            scanf("%d", &matriz[i][j]);
+        }
+    }
+
+    printf("Matriz:\n");
+    imprimirMatriz(matriz);
+
+    if (esMatrizMagica(matriz)) {
+        printf("La matriz es magica.\n");
+    } else {
+        printf("La matriz NO es magica.\n");
+    }
+
+    return 0;
+}
